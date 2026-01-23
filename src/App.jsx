@@ -12,13 +12,18 @@ function App() {
   const [error, setError] = useState("")
 
   useEffect(() => {
+  
     booksdata();
   }, [])
 
   const addBook = (newBook) => {
   const updatedBooks = [newBook, ...books]
   setBooks(updatedBooks)
+
+
    }
+
+ 
 
 
   async function booksdata(){

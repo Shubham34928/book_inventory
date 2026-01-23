@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 function AddBook({ onAddBook }) {
-  // Form state
+
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
    const [publisher, setPublisher] = useState("")
@@ -11,14 +11,11 @@ function AddBook({ onAddBook }) {
   const [image, setImage] = useState("")
   const [error, setError] = useState("")
 
-  // Navigation hook
   const navigate = useNavigate()
 
-  // Handle form submit
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = (temp) => {
+    temp.preventDefault()
 
-    // Validation
     if (!title || !author || !email || !description || !publisher) {
       setError("All fields except image are required")
       return
@@ -29,7 +26,6 @@ function AddBook({ onAddBook }) {
       return
     }
 
-    // Create new book object
     const newBook = {
       id: Date.now(),
       title,
@@ -42,10 +38,10 @@ function AddBook({ onAddBook }) {
       isUserAdded: true
     }
 
-    // Send book to parent (App.jsx)
+
     onAddBook(newBook)
 
-    // Reset form
+
     setTitle("")
     setAuthor("")
     setEmail("")
@@ -54,7 +50,7 @@ function AddBook({ onAddBook }) {
     setError("")
     setPublisher("")
 
-    // Navigate back to Home page
+
     navigate("/")
   }
 
@@ -62,14 +58,14 @@ function AddBook({ onAddBook }) {
     <div style={{ maxWidth: "450px", margin: "20px auto" }}>
       <h2>Add Book</h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p>{error}</p>}
 
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Book Title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(temp) => setTitle(temp.target.value)}
         />
 
         <br /><br />
@@ -78,7 +74,7 @@ function AddBook({ onAddBook }) {
           type="text"
           placeholder="Author Name"
           value={author}
-          onChange={(e) => setAuthor(e.target.value)}
+          onChange={(temp) => setAuthor(temp.target.value)}
         />
 
         <br /><br />
@@ -87,14 +83,14 @@ function AddBook({ onAddBook }) {
           type="text"
           placeholder="Publisher Name"
           value={publisher}
-          onChange={(e) => setPublisher(e.target.value)}
+          onChange={(temp) => setPublisher(temp.target.value)}
         />
          <br /><br />
         <input
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(temp) => setEmail(temp.target.value)}
         />
 
         <br /><br />
@@ -102,7 +98,7 @@ function AddBook({ onAddBook }) {
         <textarea
           placeholder="Book Description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(temp) => setDescription(temp.target.value)}
           rows="4"
         />
 
@@ -110,19 +106,15 @@ function AddBook({ onAddBook }) {
 
         <input
           type="text"
-          placeholder="Image URL (optional)"
+          placeholder="Image url (optional)"
           value={image}
-          onChange={(e) => setImage(e.target.value)}
+          onChange={(temp) => setImage(temp.target.value)}
         />
 
         <br /><br />
 
         <button type="submit">Add Book</button>
-        <button
-          type="button"
-          style={{ marginLeft: "10px" }}
-          onClick={() => navigate("/")}
-        >
+        <button type="button" onClick={() => navigate("/")}>
           Cancel
         </button>
       </form>
