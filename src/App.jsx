@@ -3,6 +3,8 @@ import Header from './components/Header'
 import BookTable from './components/BookTable'
 import { Routes, Route } from 'react-router-dom'
 import BookDetails from './components/BookDetails'
+import AddBook from './components/AddBook'
+
 
 function App() {
   const [books, setBooks] = useState([])
@@ -13,11 +15,17 @@ function App() {
     booksdata();
   }, [])
 
+  const addBook = (newBook) => {
+  const updatedBooks = [newBook, ...books]
+  setBooks(updatedBooks)
+   }
+
+
   async function booksdata(){
     try {
       const response = await fetch("https://www.googleapis.com/books/v1/volumes?q=javascript")
       const data = await response.json()
-
+      
       const bookdata = data.items.map((item, index) => ({
         id: index,
         title: item.volumeInfo.title || "No Title",
@@ -28,7 +36,7 @@ function App() {
         publisher:item.volumeInfo.publisher
       
       }))
-     console.log(bookdata);     
+        
       setBooks(bookdata)
     } catch{
       setError("Failed to fetch books. Please try again.")
@@ -49,6 +57,9 @@ function App() {
                                       </>
                                           }/>
       <Route path="/book/:id" element={<BookDetails />} />
+
+      <Route path="/add-book"element={<AddBook onAddBook={addBook} />}/>
+
 
       </Routes>
     </div>

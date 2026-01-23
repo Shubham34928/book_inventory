@@ -1,12 +1,15 @@
 
 import { useNavigate } from 'react-router-dom'
 
+
 function BookTable({books}) {
   
 
     const navigate = useNavigate()
   return (
     <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+      <button onClick={() => navigate("/add-book")}>+ Add Book</button>
+
       <table border="1" width="100%">
         <thead>
           <tr>

@@ -22,7 +22,7 @@ function BookDetails() {
       <h2>{book.title}</h2>
       <p><strong>Author:</strong> {book.author}</p>
       <p><strong>Publisher:</strong> {book.publisher}</p>
-      <p><strong>Published Date:</strong> {book.publishedDate}</p>
+      <p><strong>Published Date:</strong> {book.date}</p>
       <p><strong>Description:</strong>{book.description}</p>
       <p>{book.description}</p>
       
