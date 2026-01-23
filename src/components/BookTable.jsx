@@ -4,6 +4,7 @@ function BookTable({books}) {
       <table border="1" width="100%">
         <thead>
           <tr>
+            <th>Cover</th>
             <th>Title</th>
             <th>Author</th>
             <th>Action</th>
