@@ -1,11 +1,10 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-function AddBook({ onAddBook }) {
-
+function AddBook({ onAddBook, onUpdateBook, editingBook, setEditingBook }) {
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
-   const [publisher, setPublisher] = useState("")
+  const [publisher, setPublisher] = useState("")
   const [email, setEmail] = useState("")
   const [description, setDescription] = useState("")
   const [image, setImage] = useState("")
@@ -13,10 +12,21 @@ function AddBook({ onAddBook }) {
 
   const navigate = useNavigate()
 
-  const handleSubmit = (temp) => {
-    temp.preventDefault()
+  useEffect(() => {
+    if (editingBook) {
+      setTitle(editingBook.title)
+      setAuthor(editingBook.author)
+      setPublisher(editingBook.publisher)
+      setEmail(editingBook.email)
+      setDescription(editingBook.description)
+      setImage(editingBook.image)
+    }
+  }, [editingBook])
 
-    if (!title || !author || !email || !description || !publisher) {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (!title || !author || !publisher || !email || !description) {
       setError("All fields except image are required")
       return
     }
@@ -26,46 +36,58 @@ function AddBook({ onAddBook }) {
       return
     }
 
+    if (editingBook) {
+      onUpdateBook({
+        ...editingBook,
+        title,
+        author,
+        publisher,
+        email,
+        description,
+        image
+      })
+      setEditingBook(null)
+      navigate("/")
+      return
+    }
+
     const newBook = {
       id: Date.now(),
       title,
       author,
       publisher,
-      date:"7 Novemeber 2007",
+      date: "7 November 2007",
       email,
       description,
       image: image || "https://covers.openlibrary.org/b/id/10523365-L.jpg",
       isUserAdded: true
     }
 
-
     onAddBook(newBook)
-
 
     setTitle("")
     setAuthor("")
+    setPublisher("")
     setEmail("")
     setDescription("")
     setImage("")
     setError("")
-    setPublisher("")
-
 
     navigate("/")
   }
 
   return (
     <div style={{ maxWidth: "450px", margin: "20px auto" }}>
-      <h2>Add Book</h2>
+      <h2>{editingBook ? "Edit Book" : "Add Book"}</h2>
 
-      {error && <p>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Book Title"
           value={title}
-          onChange={(temp) => setTitle(temp.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
 
         <br /><br />
@@ -74,23 +96,25 @@ function AddBook({ onAddBook }) {
           type="text"
           placeholder="Author Name"
           value={author}
-          onChange={(temp) => setAuthor(temp.target.value)}
+          onChange={(e) => setAuthor(e.target.value)}
         />
 
         <br /><br />
 
-         <input
+        <input
           type="text"
           placeholder="Publisher Name"
           value={publisher}
-          onChange={(temp) => setPublisher(temp.target.value)}
+          onChange={(e) => setPublisher(e.target.value)}
         />
-         <br /><br />
+
+        <br /><br />
+
         <input
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(temp) => setEmail(temp.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <br /><br />
@@ -98,7 +122,7 @@ function AddBook({ onAddBook }) {
         <textarea
           placeholder="Book Description"
           value={description}
-          onChange={(temp) => setDescription(temp.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
           rows="4"
         />
 
@@ -106,14 +130,17 @@ function AddBook({ onAddBook }) {
 
         <input
           type="text"
-          placeholder="Image url (optional)"
+          placeholder="Image URL (optional)"
           value={image}
-          onChange={(temp) => setImage(temp.target.value)}
+          onChange={(e) => setImage(e.target.value)}
         />
 
         <br /><br />
 
-        <button type="submit">Add Book</button>
+        <button type="submit">
+          {editingBook ? "Update Book" : "Add Book"}
+        </button>
+
         <button type="button" onClick={() => navigate("/")}>
           Cancel
         </button>

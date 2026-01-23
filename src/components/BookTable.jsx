@@ -2,8 +2,9 @@
 import { useNavigate } from 'react-router-dom'
 
 
-function BookTable({books}) {
-  
+function BookTable({ books, onDelete, onEdit }) {
+
+
 
     const navigate = useNavigate()
   return (
@@ -30,6 +31,14 @@ function BookTable({books}) {
                       <td>{book.author}</td>
                      <td>
                           <button onClick={() =>navigate(`/book/${book.id}`, { state: { book } })}>View</button>
+                          
+                      {book.isUserAdded && (<>
+                     <button onClick={() => {onEdit(book) 
+                      navigate("/add-book")}}>Edit</button>
+
+                      <button onClick={() => onDelete(book.id)}>Delete</button>
+                                          </>
+                         )}  
                      </td>
                     </tr>
                   ))}
