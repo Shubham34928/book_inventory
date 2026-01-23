@@ -1,4 +1,4 @@
-function BookTable() {
+function BookTable({books}) {
   return (
     <div style={{ maxHeight: "300px", overflowY: "auto" }}>
       <table border="1" width="100%">
@@ -10,17 +10,26 @@ function BookTable() {
           </tr>
         </thead>
 
-        <tbody>
-          <tr>
-            <td>Atomic Habits</td>
-            <td>James Clear</td>
-            <td>
-              <button>View</button>
-            </td>
-          </tr>
-          
+                  <tbody>
+                  {books.map((book) => (
+                    <tr key={book.id}> 
+                      <td>
+                              <img
+                                src={book.image || "https://via.placeholder.com/60x90?text=No+Image"}
+                                alt={book.title}
+                                width="50"
+                                 />
+                      </td>
+                      <td>{book.title}</td>
+                      <td>{book.author}</td>
+                      <td>
+                        <button>View</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
 
-        </tbody>
+
       </table>
     </div>
   )
