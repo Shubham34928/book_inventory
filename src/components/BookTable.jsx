@@ -1,4 +1,10 @@
+
+import { useNavigate } from 'react-router-dom'
+
 function BookTable({books}) {
+  
+
+    const navigate = useNavigate()
   return (
     <div style={{ maxHeight: "300px", overflowY: "auto" }}>
       <table border="1" width="100%">
@@ -9,23 +15,19 @@ function BookTable({books}) {
             <th>Author</th>
             <th>Action</th>
           </tr>
-        </thead>
+        </thead> 
 
                   <tbody>
                   {books.map((book) => (
                     <tr key={book.id}> 
                       <td>
-                              <img
-                                src={book.image || "https://via.placeholder.com/60x90?text=No+Image"}
-                                alt={book.title}
-                                width="50"
-                                 />
+                              <img src={book.image} alt={book.title} width="50"/>
                       </td>
                       <td>{book.title}</td>
                       <td>{book.author}</td>
-                      <td>
-                        <button>View</button>
-                      </td>
+                     <td>
+                          <button onClick={() =>navigate(`/book/${book.id}`, { state: { book } })}>View</button>
+                     </td>
                     </tr>
                   ))}
                 </tbody>

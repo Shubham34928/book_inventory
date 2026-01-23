@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import BookTable from './components/BookTable'
+import { Routes, Route } from 'react-router-dom'
+import BookDetails from './components/BookDetails'
 
 function App() {
   const [books, setBooks] = useState([])
@@ -20,9 +22,13 @@ function App() {
         id: index,
         title: item.volumeInfo.title || "No Title",
         author: item.volumeInfo.authors?.[0] || "No Author",
-        image: item.volumeInfo.imageLinks?.thumbnail || "No Image"
+        image: item.volumeInfo.imageLinks?.thumbnail || "No Image",
+        description :item.volumeInfo.description,
+        date:item.volumeInfo.publishedDate,
+        publisher:item.volumeInfo.publisher
+      
       }))
-
+     console.log(bookdata);     
       setBooks(bookdata)
     } catch{
       setError("Failed to fetch books. Please try again.")
@@ -34,11 +40,17 @@ function App() {
   return (
     <div>
       <Header />
+       <Routes>
+            <Route path="/" element={
+                                      <>
+                                        {loading && <p>Loading books...</p>}
+                                        {error && <p style={{ color: "red" }}>{error}</p>}
+                                        {!loading && !error && <BookTable books={books} />}
+                                      </>
+                                          }/>
+      <Route path="/book/:id" element={<BookDetails />} />
 
-      {loading && <p>Loading books...</p>}
-      {error && <p>{error}</p>}
-
-      {!loading && !error && <BookTable books={books} />}
+      </Routes>
     </div>
   )
 }
