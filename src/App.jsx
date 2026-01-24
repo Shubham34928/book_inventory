@@ -18,60 +18,52 @@ function App() {
   const [error, setError] = useState("")
   const [editingBook, setEditingBook] = useState(null)
 
- useEffect(() => {
-  const storedbooks = localStorage.getItem("books")
-
-  if (storedbooks) { setBooks(JSON.parse(storedbooks))
-    setLoading(false)
-  } else {
-    booksdata()
-  }
+useEffect(() => {
+      const savebook = JSON.parse(localStorage.getItem("userBooks")) || []
+      setBooks(savebook)
+      booksdata()
 }, [])
 
 
-useEffect(() => {
-  if (books.length > 0) {
-    localStorage.setItem("books", JSON.stringify(books))
-  }
-}, [books])
-
-
-
-
-const addBook = (newBook) => {
-  const bookflag = {...newBook,bookadded: true}
-
-  setBooks(prevBooks => [bookflag, ...prevBooks])
+const addBook = (newBook) => {const updatedBooks = [newBook, ...books]
+  setBooks(updatedBooks)
+  const userBooks = updatedBooks.filter((book) => book.isUserAdded)
+  localStorage.setItem("userBooks", JSON.stringify(userBooks))
 }
 
+  const deleteBook = (id) => {setBooks((prevBooks) => prevBooks.filter(book => book.id !== id))}
 
-  const deleteBook = (id) => {setBooks(prevBooks => prevBooks.filter(book => book.id !== id))}
+  
+  const updateBook = (updatedBook) => {const updatedBooks = books.map((book) => book.id === updatedBook.id ? updatedBook : book)
+  setBooks(updatedBooks)
 
-  const updateBook = (updatedBook) => {setBooks(prevBooks =>prevBooks.map(book => book.id === updatedBook.id ? updatedBook : book ) )}
+  const userBooks = updatedBooks.filter(book => book.isUserAdded)
+  localStorage.setItem("userBooks", JSON.stringify(userBooks))
+}
+
 
   async function booksdata() {
     try {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=javascript&key=${API_KEY}`
+      ` https://www.googleapis.com/books/v1/volumes?q=javascript&maxResults=20&key=${API_KEY}`
+
       )
       const data = await response.json()
         console.log(data);
       const bookdata = data.items.map((item, index) => ({
-        id: index,
+        id: item.id,
         title: item.volumeInfo.title || "No Title",
         author: item.volumeInfo.authors?.[0] || "No Author",
         image: item.volumeInfo.imageLinks?.thumbnail || "No Image",
         description: item.volumeInfo.description,
         date: item.volumeInfo.publishedDate,
         publisher: item.volumeInfo.publisher,
-        preview:item.volumeInfo.previewLink,
-        booadded: false
+        preview:item.volumeInfo.previewLink
       }))
        console.log(bookdata);
     
 
-      setBooks(bookdata)
-
+      setBooks(prevBooks => [...prevBooks, ...bookdata])
     } catch(err){
       setError("Failed to fetch books. Please try again.",err)
     } finally {
