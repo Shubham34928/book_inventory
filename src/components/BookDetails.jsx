@@ -47,6 +47,10 @@ function BookDetails() {
         <h3>Description</h3>
         <p>{book.description}</p>
       </div>
+       <div className="bookpreview">
+
+        <button onClick={() => window.open(book.preview, "_blank")}> Preview</button>
+      </div>
     </div>
   )
 }

@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #f3f4f6;
+  background-color: #ffffff;
 }
 
 
@@ -17,8 +17,8 @@ body {
   padding: 28px;
   background-color: #ffffff;
   border-radius: 14px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
-  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.47);
+  border: 1px solid #ffffff;
 }
 
 
@@ -79,7 +79,7 @@ body {
 
 .addbookbtn input::placeholder,
 .addbookbtn textarea::placeholder {
-  color: #9ca3af;
+  color: #717b8b;
 }
 
 
@@ -94,7 +94,7 @@ body {
 .submitbtn {
   flex: 1;
   padding: 10px;
-  background-color: #4f46e5;
+ background: linear-gradient(135deg, #a0307e, #8e194e);
   color: #ffffff;
   font-size: 14px;
   font-weight: 600;
@@ -105,7 +105,7 @@ body {
 }
 
 .submitbtn:hover {
-  background-color: #4338ca;
+  background: linear-gradient(135deg, #3e072f, #230217);
   transform: translateY(-1px);
 }
 

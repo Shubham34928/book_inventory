@@ -165,7 +165,7 @@ button:active {
 
 
 .actionbtn button:nth-child(1) {
-  background-color: #603378;
+  background-color: #641140;
   color: #ffffff;
   box-shadow: 0 4px 10px rgba(187, 48, 48, 0.35);
 }
@@ -178,25 +178,25 @@ button:active {
 
 
 .actionbtn button:nth-child(2) {
-  background-color: #f59e0b;
+  background-color: #6521a5;
   color: #ffffff;
   box-shadow: 0 4px 10px rgba(245, 158, 11, 0.35);
 }
 
 .actionbtn button:nth-child(2):hover {
-  background-color: #d97706;
+  background-color: #9b4ce6;
   transform: translateY(-1px);
 }
 
 
 .actionbtn button:nth-child(3) {
-  background-color: #ef4444;
+  background-color: #ba0000;
   color: #ffffff;
   box-shadow: 0 4px 10px rgba(239, 68, 68, 0.35);
 }
 
 .actionbtn button:nth-child(3):hover {
-  background-color: #dc2626;
+  background-color: #dc6565;
   transform: translateY(-1px);
 }
 

@@ -122,3 +122,39 @@
     margin-top: 16px;
   }
 }
+
+
+.bookpreview {
+  margin-top: 24px;
+}
+
+
+
+
+.bookpreview button {
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #a0307e, #8e194e);
+  color: #ffffff;
+
+  box-shadow: 0 10px 22px rgba(49, 7, 34, 0.35);
+  transition: 
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+}
+
+.bookpreview button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.45);
+  background: linear-gradient(135deg, #3e072f, #230217);
+}
+
+.bookpreview button:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+}

@@ -34,7 +34,7 @@ function App() {
         `https://www.googleapis.com/books/v1/volumes?q=javascript&key=${API_KEY}`
       )
       const data = await response.json()
-
+        console.log(data);
       const bookdata = data.items.map((item, index) => ({
         id: index,
         title: item.volumeInfo.title || "No Title",
@@ -42,8 +42,11 @@ function App() {
         image: item.volumeInfo.imageLinks?.thumbnail || "No Image",
         description: item.volumeInfo.description,
         date: item.volumeInfo.publishedDate,
-        publisher: item.volumeInfo.publisher
+        publisher: item.volumeInfo.publisher,
+        preview:item.volumeInfo.previewLink
       }))
+       console.log(bookdata);
+    
 
       setBooks(prevBooks => [...prevBooks, ...bookdata])
     } catch(err){
