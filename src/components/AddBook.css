@@ -1,0 +1,140 @@
+
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background-color: #f3f4f6;
+}
+
+
+
+.bookcontainer {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 28px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e5e7eb;
+}
+
+
+
+.booktitle {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+
+
+.formerror {
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  border: 1px solid #fecaca;
+}
+
+
+
+.addbookbtn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+
+.addbookbtn input,
+.addbookbtn textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.addbookbtn textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+
+.addbookbtn input:focus,
+.addbookbtn textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+
+.addbookbtn input::placeholder,
+.addbookbtn textarea::placeholder {
+  color: #9ca3af;
+}
+
+
+.formbuttons{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+
+.submitbtn {
+  flex: 1;
+  padding: 10px;
+  background-color: #4f46e5;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.submitbtn:hover {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+}
+
+
+.cancelbtn {
+  flex: 1;
+  padding: 10px;
+  background-color: #e5e7eb;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancelbtn:hover {
+  background-color: #d1d5db;
+}
+
+
+@media (max-width: 480px) {
+  .bookcontainer {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .formbuttons {
+    flex-direction: column;
+  }
+}

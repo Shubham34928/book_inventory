@@ -1,15 +1,16 @@
 
 import { useNavigate } from 'react-router-dom'
+import "./BookTable.css"
 
 
 function BookTable({ books, onDelete, onEdit }) {
 
 
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   return (
-    <div style={{ maxHeight: "300px", overflowY: "auto" }}>
-      <button onClick={() => navigate("/add-book")}>+ Add Book</button>
+<div className="tablecontainer">
+    
 
       <table border="1" width="100%">
         <thead>
@@ -25,11 +26,12 @@ function BookTable({ books, onDelete, onEdit }) {
                   {books.map((book) => (
                     <tr key={book.id}> 
                       <td>
-                              <img src={book.image} alt={book.title} width="50"/>
+                             <img src={book.image} alt={book.title} className="book-cover" />
                       </td>
-                      <td>{book.title}</td>
-                      <td>{book.author}</td>
+                      <td ><div className="book-title">{book.title}</div></td>
+                      <td> <div className="book-author">{book.author}</div></td>
                      <td>
+                        <div className="actionbtn">
                           <button onClick={() =>navigate(`/book/${book.id}`, { state: { book } })}>View</button>
                           
                       {book.isUserAdded && (<>
@@ -38,7 +40,8 @@ function BookTable({ books, onDelete, onEdit }) {
 
                       <button onClick={() => onDelete(book.id)}>Delete</button>
                                           </>
-                         )}  
+                         )}
+                         </div>  
                      </td>
                     </tr>
                   ))}

@@ -5,6 +5,8 @@ import BookTable from './components/BookTable'
 import BookDetails from './components/BookDetails'
 import AddBook from './components/AddBook'
 
+
+
 function App() {
   const [books, setBooks] = useState([])
   const [loading, setLoading] = useState(true)
@@ -24,7 +26,7 @@ function App() {
   async function booksdata() {
     try {
       const response = await fetch(
-        "https://www.googleapis.com/books/v1/volumes?q=javascript"
+        "https://www.googleapis.com/books/v1/volumes?q=javascript&key=AIzaSyC3z2WI_pZsXye_UKmtQLKRe4NVFXEisBk"
       )
       const data = await response.json()
 
@@ -39,8 +41,8 @@ function App() {
       }))
 
       setBooks(prevBooks => [...prevBooks, ...bookdata])
-    } catch {
-      setError("Failed to fetch books. Please try again.")
+    } catch(err){
+      setError("Failed to fetch books. Please try again.",err)
     } finally {
       setLoading(false)
     }

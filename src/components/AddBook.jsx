@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import "./AddBook.css"
 
 function AddBook({ onAddBook, onUpdateBook, editingBook, setEditingBook }) {
   const [title, setTitle] = useState("")
@@ -23,8 +24,8 @@ function AddBook({ onAddBook, onUpdateBook, editingBook, setEditingBook }) {
     }
   }, [editingBook])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const submitbutton = (temp) => {
+    temp.preventDefault()
 
     if (!title || !author || !publisher || !email || !description) {
       setError("All fields except image are required")
@@ -75,75 +76,32 @@ function AddBook({ onAddBook, onUpdateBook, editingBook, setEditingBook }) {
 
     navigate("/")
   }
-
   return (
-    <div style={{ maxWidth: "450px", margin: "20px auto" }}>
-      <h2>{editingBook ? "Edit Book" : "Add Book"}</h2>
+    <div className="bookcontainer">
+      <h2 className="booktitle">
+        {editingBook ? "Edit Book" : "Add Book"}
+      </h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <div className="formerror">{error}</div>}
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Book Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <form className="addbookbtn" onSubmit={submitbutton}>
+                    <input type="text" placeholder="Book Title" value={title} onChange={(temp) => setTitle(temp.target.value)}/>
 
-        <br /><br />
+                    <input type="text" placeholder="Author Name" value={author} onChange={(temp) => setAuthor(temp.target.value)}/>
 
-        <input
-          type="text"
-          placeholder="Author Name"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
+                    <input type="text" placeholder="Publisher Name"value={publisher} onChange={(temp) => setPublisher(temp.target.value)}/>
 
-        <br /><br />
+                    <input type="email" placeholder="Email" value={email} onChange={(temp) => setEmail(temp.target.value)} />
 
-        <input
-          type="text"
-          placeholder="Publisher Name"
-          value={publisher}
-          onChange={(e) => setPublisher(e.target.value)}
-        />
+                    <textarea placeholder="Book Description" value={description} onChange={(temp) => setDescription(temp.target.value)}/>
 
-        <br /><br />
+                    <input type="text" placeholder="Image URL (optional)" value={image} onChange={(temp) => setImage(temp.target.value)}/>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+                    <div className="formbuttons">
+                      <button type="submit" className="submitbtn">{editingBook ? "Update Book" : "Add Book"} </button>
 
-        <br /><br />
-
-        <textarea
-          placeholder="Book Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows="4"
-        />
-
-        <br /><br />
-
-        <input
-          type="text"
-          placeholder="Image URL (optional)"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
-
-        <br /><br />
-
-        <button type="submit">
-          {editingBook ? "Update Book" : "Add Book"}
-        </button>
-
-        <button type="button" onClick={() => navigate("/")}>
-          Cancel
-        </button>
+                      <button type="button" className="cancelbtn" onClick={() => navigate("/")}>Cancel</button>
+                    </div>
       </form>
     </div>
   )
