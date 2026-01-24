@@ -18,11 +18,32 @@ function App() {
   const [error, setError] = useState("")
   const [editingBook, setEditingBook] = useState(null)
 
-  useEffect(() => {
-    booksdata()
-  }, [])
+ useEffect(() => {
+  const storedbooks = localStorage.getItem("books")
 
-  const addBook = (newBook) => {setBooks(prevBooks => [newBook, ...prevBooks])}
+  if (storedbooks) { setBooks(JSON.parse(storedbooks))
+    setLoading(false)
+  } else {
+    booksdata()
+  }
+}, [])
+
+
+useEffect(() => {
+  if (books.length > 0) {
+    localStorage.setItem("books", JSON.stringify(books))
+  }
+}, [books])
+
+
+
+
+const addBook = (newBook) => {
+  const bookflag = {...newBook,bookadded: true}
+
+  setBooks(prevBooks => [bookflag, ...prevBooks])
+}
+
 
   const deleteBook = (id) => {setBooks(prevBooks => prevBooks.filter(book => book.id !== id))}
 
@@ -43,12 +64,14 @@ function App() {
         description: item.volumeInfo.description,
         date: item.volumeInfo.publishedDate,
         publisher: item.volumeInfo.publisher,
-        preview:item.volumeInfo.previewLink
+        preview:item.volumeInfo.previewLink,
+        booadded: false
       }))
        console.log(bookdata);
     
 
-      setBooks(prevBooks => [...prevBooks, ...bookdata])
+      setBooks(bookdata)
+
     } catch(err){
       setError("Failed to fetch books. Please try again.",err)
     } finally {
