@@ -11,6 +11,7 @@ const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
 
 
 
+  
 
 function App() {
   const [books, setBooks] = useState([])
@@ -31,7 +32,14 @@ const addBook = (newBook) => {const updatedBooks = [newBook, ...books]
   localStorage.setItem("userBooks", JSON.stringify(userBooks))
 }
 
-  const deleteBook = (id) => {setBooks((prevBooks) => prevBooks.filter(book => book.id !== id))}
+
+ const deleteBook = (id) => {const updatedBooks = books.filter(book => book.id !== id)
+  setBooks(updatedBooks)
+
+  const userBooks = updatedBooks.filter(book => book.isUserAdded)
+  localStorage.setItem("userBooks", JSON.stringify(userBooks))
+}
+
 
 
   const updateBook = (updatedBook) => {const updatedBooks = books.map((book) => book.id === updatedBook.id ? updatedBook : book)
@@ -43,13 +51,16 @@ const addBook = (newBook) => {const updatedBooks = [newBook, ...books]
 
 
   async function booksdata() {
+      let startindex=Math.floor(Math.random()*200)+1
     try {
       const response = await fetch(
-      ` https://www.googleapis.com/books/v1/volumes?q=javascript&maxResults=20&key=${API_KEY}`
+      `https://www.googleapis.com/books/v1/volumes?q=javascript&startIndex=${startindex}&maxResults=20&key=${API_KEY}`
 
       )
+
+  
       const data = await response.json()
-        console.log(data);
+    
       const bookdata = data.items.map((item, index) => ({
         id: item.id,
         title: item.volumeInfo.title || "No Title",

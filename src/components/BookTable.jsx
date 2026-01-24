@@ -31,9 +31,9 @@ function BookTable({ books, onDelete, onEdit }) {
                       <td>
                              <img src={book.image} alt={book.title || "Book cover" } className="cover" />
                       </td>
-                      <td ><div className="book-title">{book.title}</div></td>
-                         <td ><div className="description">{book.description}</div></td>
-                      <td> <div className="author">{book.author}</div></td>
+                      <td ><div className="book-title">{book.title || "error fetching Book Titile"}</div></td>
+                         <td ><div className="description">{book.description ||"No Description "}</div></td>
+                      <td> <div className="author">{book.author || "Author name not available"}</div></td>
                      <td>
                         <div className="actionbtn">
                           <button onClick={() =>navigate(`/book/${book.id}`, { state: { book } })}>View</button>
