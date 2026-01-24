@@ -18,6 +18,7 @@ function BookTable({ books, onDelete, onEdit }) {
           <tr>
             <th>Cover</th>
             <th>Title</th>
+            <th>description</th>
             <th>Author</th>
             <th>Action</th>
             
@@ -31,6 +32,7 @@ function BookTable({ books, onDelete, onEdit }) {
                              <img src={book.image} alt={book.title || "Book cover" } className="cover" />
                       </td>
                       <td ><div className="book-title">{book.title}</div></td>
+                         <td ><div className="description">{book.description}</div></td>
                       <td> <div className="author">{book.author}</div></td>
                      <td>
                         <div className="actionbtn">
