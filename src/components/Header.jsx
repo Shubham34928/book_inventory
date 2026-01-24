@@ -8,8 +8,8 @@ function Header() {
   const showAddButton = location.pathname !== "/add-book"
 
   return (
-    <header className="app-header">
-      <h1 className="app-title">Book Inventory</h1>
+    <header className="header">
+      <h1 className="title">Book Inventory</h1>
 
       {showAddButton && (
         <button className="addbtn"onClick={() => navigate("/add-book")}> Add Book</button>

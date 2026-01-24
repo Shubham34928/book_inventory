@@ -12,13 +12,15 @@ function BookTable({ books, onDelete, onEdit }) {
 <div className="tablecontainer">
     
 
-      <table border="1" width="100%">
+      <table width="100%">
+
         <thead>
           <tr>
             <th>Cover</th>
             <th>Title</th>
             <th>Author</th>
             <th>Action</th>
+            
           </tr>
         </thead> 
 
@@ -26,10 +28,10 @@ function BookTable({ books, onDelete, onEdit }) {
                   {books.map((book) => (
                     <tr key={book.id}> 
                       <td>
-                             <img src={book.image} alt={book.title} className="book-cover" />
+                             <img src={book.image} alt={book.title || "Book cover" } className="cover" />
                       </td>
                       <td ><div className="book-title">{book.title}</div></td>
-                      <td> <div className="book-author">{book.author}</div></td>
+                      <td> <div className="author">{book.author}</div></td>
                      <td>
                         <div className="actionbtn">
                           <button onClick={() =>navigate(`/book/${book.id}`, { state: { book } })}>View</button>

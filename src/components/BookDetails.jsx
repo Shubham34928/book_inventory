@@ -13,11 +13,11 @@ function BookDetails() {
 
   return (
     <div className="bookcontainer">
-      <button className="back-button" onClick={() => navigate("/")}>
+      <button className="backbutton" onClick={() => navigate("/")}>
         ← Back to Home
       </button>
 
-      <div className="book-header">
+      <div className="bookheader">
         {book.image && (
           <img
             src={book.image}
