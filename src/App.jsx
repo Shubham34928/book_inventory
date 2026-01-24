@@ -33,7 +33,7 @@ const addBook = (newBook) => {const updatedBooks = [newBook, ...books]
 
   const deleteBook = (id) => {setBooks((prevBooks) => prevBooks.filter(book => book.id !== id))}
 
-  
+
   const updateBook = (updatedBook) => {const updatedBooks = books.map((book) => book.id === updatedBook.id ? updatedBook : book)
   setBooks(updatedBooks)
 
@@ -76,19 +76,11 @@ const addBook = (newBook) => {const updatedBooks = [newBook, ...books]
       <Header />
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <>
+        <Route path="/" element={<>
               {loading && <p>Loading books...</p>}
               {error && <p style={{ color: "red" }}>{error}</p>}
               {!loading && !error && (
-                <BookTable
-                  books={books}
-                  onDelete={deleteBook}
-                  onEdit={setEditingBook}
-                />
-              )}
+                <BookTable books={books} onDelete={deleteBook} onEdit={setEditingBook}/>)}
             </>
           }
         />
@@ -102,6 +94,7 @@ const addBook = (newBook) => {const updatedBooks = [newBook, ...books]
           }
         />
       </Routes>
+
     </div>
   )
 }
