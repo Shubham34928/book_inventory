@@ -1,9 +1,14 @@
+
+
 import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import BookTable from './components/BookTable'
 import BookDetails from './components/BookDetails'
 import AddBook from './components/AddBook'
+
+const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
+
 
 
 
@@ -26,7 +31,7 @@ function App() {
   async function booksdata() {
     try {
       const response = await fetch(
-        "https://www.googleapis.com/books/v1/volumes?q=javascript&key=AIzaSyC3z2WI_pZsXye_UKmtQLKRe4NVFXEisBk"
+        `https://www.googleapis.com/books/v1/volumes?q=javascript&key=${API_KEY}`
       )
       const data = await response.json()
 
