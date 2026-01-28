@@ -8,7 +8,7 @@ This project was developed as part of a technical assignment to demonstrate core
 
 ## Live Demo
 
-https://react-book-inventory-system-lcrjbaamn-shubham34928s-projects.vercel.app/
+https://react-book-inventory-system.vercel.app/
 
 ---
 
